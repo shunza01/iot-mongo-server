@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js"></script>
+  <script src="app.js"></script>
+  <meta charset="utf-8">
+  <title>IOT</title>
+</head>
+<body ng-controller="AppController as scope">
+<br>
+
+<div class="col-sm-2">
+	 <div class="input-group">
+	<div class="input-group-addon">Search</div>
+	<input type= "text" class="form-control input-lg" placeholder = "IOT ID"
+			ng-model="byid">
+	</div>
+	</div>
+
+<div class="col-sm-2">
+<button class="btn btn-info btn-lg glyphicon glyphicon-stats" 
+		ng-click="scope.tologin()"> ViewReport</button>
+</div>
+
+<div class="col-sm-6"></div>
+  		<button class="btn btn-success glyphicon glyphicon-user" 
+  			ng-click="scope.tologin()"> Login</button>
+
+  		<button class="btn btn-warning glyphicon glyphicon-edit" 
+  			ng-click="scope.toregis()"> Register</button>
+		<br>
+		<center><h1>Internet of Things</h1>
+		<br>
+
+	<form ng-submit='scope.submit(input)'>
+
+  <div class="col-sm-4"></div>
+
+  		<div class="col-sm-4">
+  			<input type="text" class="form-control input-lg" placeholder= "IOT ID" 
+  			ng-model="input.iot_id"> 
+
+  			<br>
+
+   			<input type="text" class="form-control input-lg" placeholder= "Temperature" 
+   			ng-model="input.temperature">
+
+   			<br>
+			<input type="text" class="form-control input-lg" placeholder = "Relative_Humidity" 
+			ng-model="input.relative_humidity">
+
+  	</div>
+  	<br><br><br><br><br><br><br><br><br><br>
+	<button type="submit" class="btn btn-primary glyphicon glyphicon-floppy-save"> Add </button>
+	</form>
+	</center>
+				
+
+<table class="table table-hover">
+				<thead>
+			      <tr>
+			        <th class="col-sm-1"><center>No.</center></th>
+			        <th class="col-sm-1"><center>IOT ID</center></th>
+			        <th class="col-sm-1"><center>Temperature</center></th>
+				    <th class="col-sm-2"><center>Relative Humidity</center></th>
+				    <th class="col-sm-1"><center>Date</center></th>
+			         <th class="col-sm-2"><center>Delete</center></th>
+
+			      </tr>
+			    </thead>
+			    <tbody>
+			    	<tr ng-repeat="show in scope.data | filter:{iot_id:byid}">
+
+			    	<td class="col-sm-1"><center>{{$index}}</center></td>
+				  	<td class="col-sm-1"><center>{{show.iot_id}}</center></td>
+				  	<td class="col-sm-1"><center>{{show.temperature}}</center></td>
+				  	<td class="col-sm-1"><center>{{show.relative_humidity}}</center></td>
+				  	<td class="col-sm-4"><center>{{scope.toTime(show.timestamp)}}</center></td>
+
+				  	<td class="col-sm-1">
+				  	<center>
+				  		<button class="btn btn-danger glyphicon glyphicon-trash " ng-click="scope.delete(show._id,$index)">
+				  		</button>
+				  	</center>
+				  	</td>
+
+
+	
+				  	</tr>
+			    </tbody>
+			  </table>
+
+		
+
+
+</body>
+</html>
